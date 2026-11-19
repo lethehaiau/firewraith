@@ -7,6 +7,7 @@ authors:
     family-names: Le
     orcid: "https://orcid.org/0009-0001-8824-2615"
 version: "0.1.0"
+doi: "10.5281/zenodo.24362892"
 license: MIT
 abstract: >-
   A browser toolkit for swappable real-time fire modules in Three.js games,
