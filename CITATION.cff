@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use Firewraith in your work, please cite the version you used."
+title: Firewraith
+type: software
+authors:
+  - given-names: Au
+    family-names: Le
+    orcid: "https://orcid.org/0009-0001-8824-2615"
+version: "0.1.0"
+license: MIT
+abstract: >-
+  A browser toolkit for swappable real-time fire modules in Three.js games,
+  with a module API, GPU helpers, and WebGL2 and WebGPU reference implementations.

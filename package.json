@@ -1,0 +1,29 @@
+{
+  "name": "firewraith",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "description": "Swappable real-time fire modules for the VALLEYWARD game: the Fire API, a helper kit and the reference modules.",
+  "type": "module",
+  "exports": {
+    ".": "./src/api/index.js",
+    "./api": "./src/api/index.js",
+    "./kit/webgl2": "./src/kit/webgl2/index.js",
+    "./kit/webgpu": "./src/kit/webgpu/index.js",
+    "./modules/classic": "./modules/classic/index.js",
+    "./modules/classic/info": "./modules/classic/info.js",
+    "./modules/classic-webgpu": "./modules/classic-webgpu/index.js",
+    "./modules/classic-webgpu/info": "./modules/classic-webgpu/info.js",
+    "./package.json": "./package.json"
+  },
+  "files": ["src", "modules", "docs", "README.md", "LICENSE", "THIRD-PARTY-NOTICES.md"],
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  },
+  "peerDependencies": {
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "three": "0.186.1"
+  }
+}
