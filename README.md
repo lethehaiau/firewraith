@@ -1,155 +1,77 @@
-# Firewraith
+<h1 align="center">Firewraith</h1>
 
-Swappable real-time fire for the VALLEYWARD game. VALLEYWARD is a first-person horde survivor where your fire really
-burns the horde.
+<p align="center"><b>A playground for real-time volumetric fire in the browser.</b></p>
 
-- **What this repo holds:**
-  - the **Fire API**;
-  - a **kit** of GPU helpers;
-  - the **reference fire modules**.
-- **The idea:** write your own fire or fluid simulation as a module, drop it into the game, and play with it.
-- **The game:** lives in its own repo and loads modules from here.
+<p align="center">
+  <a href="https://valleyward.app/?firemod=classic"><b>Play WebGL2</b></a> ·
+  <a href="https://valleyward.app/?firemod=classic-webgpu"><b>Play WebGPU</b></a> ·
+  <a href="#build-a-module">Build a module</a> ·
+  <a href="#contribute-a-module">Contribute a module</a>
+</p>
 
-> Version 0.2.0
-> - **Done:** API v1, the `classic` module (webgl2) and its WebGPU port `classic-webgpu`, the module catalog and the
->   checks every module must pass ([CONTRIBUTING.md](CONTRIBUTING.md)).
-> - **Planned:** starter modules, the create tool, a standalone benchmark, and a module picker in the hosted game. See
->   "Plan" below.
-> - **Licence:** MIT.
+Build your own fire or smoke simulation and try it in VALLEYWARD, a browser horde survivor. Firewraith gives you a
+module API and GPU helpers for Three.js. Your fire can react to wind and rain, light the scene, and decide what burns
+as you play. [VALLEYWARD source](https://github.com/lethehaiau/valleyward)
 
-## The words
+## Bring your own fire
 
-| | |
-|---|---|
-| **fire module** | One swappable implementation of the fire. |
-| **slot** | Where it plugs in: **`lance`** (the Ember Lance's airborne flame) or **`ground`** (the fire on the ground). |
-| **method** | Whatever you do inside: a 2D or 3D grid, particles, SPH, anything. |
-| **host** | The game side. It loads modules, feeds them, and falls back to `classic` if one fails. |
-| **edition** | The game boots in WebGL2 or WebGPU to match your module's `backend`. |
+The reference fire uses a 2D fluid grid rendered as a ray-marched 2.5D volume. Try it in WebGL2 or WebGPU using the links
+above, or read how it works in the [classic breakdown](modules/classic/FLUID.md) and [WebGPU port](modules/classic-webgpu/README.md).
 
-## A module in one screen
+What would you try? Run a full 3D grid on WebGPU and see how smoke rolls over the walls. Try particles for a flame that
+breaks into glowing embers. Render at a lower resolution and see how much detail you can recover with upsampling.
 
-```js
-export const info = { id: 'my-fire', name: 'My fire', version: '0.1.0', api: 1, backend: 'webgl2', slots: ['lance'] };
+## Build a module
 
-export async function create(host) {
-  // host.renderer: the game's three.js renderer; host.world: ground height, walls, the Lance's physics, …
-  return {
-    lance(state) { /* { on, origin, dir, range, hue, landing } */ },
-    update(dt, { rain }) { /* simulate */ },
-    render(renderer, { colorTex, depthTex, camera, target, width, height }) { /* scene + your fire → target */ },
-    reset() {}, dispose() {},
-  };
-}
-```
+Start with one effect. A `lance` module draws the Ember Lance's airborne flame. A `ground` module handles fire and smoke
+on the ground, with the option to light the world or tell the game what burns. A module can fill both roles. See the
+[Fire API](docs/API.md) for the `info` and `create(host)` exports and what the game provides each frame.
 
-A `ground` module also gets `events(list, wind)`: firebombs, Lance landings, burning goblins, douses. It may return:
+With Node.js 24, clone Firewraith and run the module checks.
 
-- `fire`: a gameplay grid, so your fire decides what burns;
-- `lightMap`: your fire lights the world.
-
-Full rules: **[docs/API.md](docs/API.md)**.
-
-## Climbing the ladder
-
-| Level | You write | You get |
-|---|---|---|
-| 1 | `lance` + `render` | your own fire-gun flame |
-| 2 | `ground`: `events` + `render` | your own ground fire, smoke and embers |
-| 3 | `ground` + `fire` (a gameplay grid) | your fire burns goblins |
-| extras | `lightMap`, `nearLight`, `stats` | it lights the world, the hands, the perf HUD |
-
-## Layout
-
-| Path | What |
-|---|---|
-| `src/api/` | The Fire API v1 code: events (`FIRE_OP`, `FIRE_HUE`, `HUE_RAMPS`, `HUE_LIGHT`), `SLOTS`, `BACKENDS`, validators (`checkInfo`, `checkModule`, `defineInfo`), JSDoc types. No three.js. |
-| `src/kit/webgl2/` | Helpers for WebGL2 modules: render targets, ping-pong pairs, full-screen passes, depth reconstruction, noise, the non-stalling GPU → CPU grid read-back, a GPU timer. |
-| `src/kit/webgpu/` | The same helpers for WebGPU (TSL) modules: render targets and ping-pong pairs, full-screen `QuadMesh` passes, two-output (MRT) passes, MRT-safe clears, depth reconstruction in TSL, the noise texture and `noise3`, instanced quads, and the non-stalling read-back (`readRenderTargetPixelsAsync`). |
-| `modules/classic/` | VALLEYWARD's original fire (webgl2, both slots): a 2D GPU grid fluid drawn as a ray-marched 2.5D volume, plus the Lance's particle jet. `FLUID.md` is its technical reference. |
-| `modules/classic-webgpu/` | `classic` ported to WebGPU (TSL), both slots: the same fire, knobs and CPU code, the WebGPU edition's default module. Its README lists what differs. |
-| `docs/API.md` | The Fire API v1. |
-| `docs/DECISIONS.md` | Why it is built this way. |
-| `tests/` | `npm test` (Node): the API, classic's and classic-webgpu's loading and boundaries, the webgpu read-back. |
-
-Package entry points:
-
-- `firewraith/api`
-- `firewraith/kit/webgl2`
-- `firewraith/kit/webgpu`
-- `firewraith/modules/classic`
-- `firewraith/modules/classic/info`
-- `firewraith/modules/classic-webgpu`
-- `firewraith/modules/classic-webgpu/info`
-
-`three` 0.186.1 is a peer dependency: modules share the game's three.js.
-
-## Install and run the tests
-
-From the Firewraith checkout, use Node.js and npm to install the locked dependencies and run the tests.
-
-```bash
+```sh
+git clone https://github.com/lethehaiau/firewraith.git
+cd firewraith
 npm ci
 npm test
 ```
 
-The tests cover the Fire API, reference module loading, and WebGPU readback without a browser or GPU.
+Put your implementation in `modules/<id>/` with an `info.js`, `index.js`, and `README.md`. Give it a unique ID and add it
+to the [module catalog](modules/catalog.js). Then run VALLEYWARD against your local Firewraith checkout.
 
-## Try the interactive demo in VALLEYWARD
-
-Play it online at **[valleyward.app](https://valleyward.app)**: the reference fire, `classic`, or its WebGPU port at
-[valleyward.app/?firemod=classic-webgpu](https://valleyward.app/?firemod=classic-webgpu). To run it locally:
-
-Clone [VALLEYWARD](https://github.com/lethehaiau/valleyward) and run it; it installs the published Firewraith:
-
-```bash
-git clone https://github.com/lethehaiau/valleyward.git && cd valleyward
+```sh
+cd ..
+git clone https://github.com/lethehaiau/valleyward.git
+cd valleyward
 npm ci
+npm install --no-save ../firewraith
 npm run dev
 ```
 
-Open [the WebGL2 demo](http://127.0.0.1:5350/?lance=classic&ground=classic) or
-[the WebGPU demo](http://127.0.0.1:5350/?firemod=classic-webgpu) in a browser that supports the selected backend. To run
-the game on your local Firewraith instead, clone both side by side and run `npm install --no-save ../firewraith` in the
-game's folder.
+Open `http://127.0.0.1:5350/?firemod=<id>` with your module ID. To swap one effect, use `?lance=<id>` or `?ground=<id>`.
+Add `&perf=1` to see frame times, and inspect `__ew.perf().fire` in the browser console for module stats.
 
-Your own module, served by any dev server on this machine:
+You can also prototype in your own repo. Serve a browser-ready ES module from a local dev server and load it in your
+local game with a URL such as `http://127.0.0.1:5350/?lance=http://localhost:5173/src/index.js`.
 
-```
-http://127.0.0.1:5350/?lance=http://localhost:5173/src/index.js
-```
+## Contribute a module
 
-## Contributing
+1. Fork Firewraith and add your module folder and catalog entry. Credit yourself in `info.author` and the module README.
+2. Run `npm test` and try your module in VALLEYWARD.
+3. Open a pull request. Describe your idea, include a screenshot or short clip, and share your browser, GPU, and
+   performance results.
 
-New fire modules are welcome. [CONTRIBUTING.md](CONTRIBUTING.md) explains the module layout, the catalog entry, the
-checks, how to test a module in the game, and how to open a pull request.
+After review and merge, your module can ship in a Firewraith release. Once VALLEYWARD deploys that release, anyone can
+play your module at `https://valleyward.app/?firemod=<id>`.
 
-## Plan
+Improvements to the API, GPU helpers, and reference modules are welcome too. [Contribution guide](CONTRIBUTING.md)
 
-1. **Done:** the Fire API v1, the kit, `classic`, and the game's fire host (per-slot fallback, `?lance=` / `?ground=`,
-   localhost module URLs).
-2. **Done:** the two game editions (WebGL2 and WebGPU) and the `webgpu` reference module, `classic-webgpu`.
-3. **For authors:**
-   - starter modules for particles, a 2D grid, and a 3D grid;
-   - a `create` tool;
-   - a standalone bench;
-   - hot reload inside the running game;
-   - live switching;
-   - a sandbox mode.
-4. **Listing modules:** done: the module catalog (`modules/catalog.js`), which the game reads, and the checks every
-   module must pass (`tests/modules.test.mjs`, run on every pull request). Next: a module picker in the hosted game.
+## Cite Firewraith
 
-## Citation
-
-If you use Firewraith in your work, cite the version you used: v0.2.0 is
-[10.5281/zenodo.24364837](https://doi.org/10.5281/zenodo.24364837), and
-[10.5281/zenodo.24362891](https://doi.org/10.5281/zenodo.24362891) always points to the latest version. See
-[CITATION.cff](CITATION.cff) for the citation metadata.
+Cite the release you used. [v0.2.0 DOI](https://doi.org/10.5281/zenodo.24364837) ·
+[All versions](https://doi.org/10.5281/zenodo.24362891) · [Citation metadata](CITATION.cff)
 
 ## Licence
 
-MIT: see [LICENSE](LICENSE). It covers everything in this repo: the API, the kit and the reference
-modules. A module you keep in your own repo and load by URL is yours, under whatever licence you choose; a module contributed to
-this repo is MIT (see CONTRIBUTING.md). Two small shader
-snippets by other authors (David Hoskins' `hash12`, Inigo Quilez's texture value noise) are MIT too: see
-[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md). The package is still marked `private` until it is published to npm.
+Firewraith and modules contributed here are MIT-licensed. [MIT License](LICENSE) ·
+[Third-party notices](THIRD-PARTY-NOTICES.md)
