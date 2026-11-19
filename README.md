@@ -138,7 +138,10 @@ checks, how to test a module in the game, and how to open a pull request.
 
 ## Citation
 
-If you use Firewraith in your work, cite the version you used. See [CITATION.cff](CITATION.cff) for the citation metadata.
+If you use Firewraith in your work, cite the version you used: v0.2.0 is
+[10.5281/zenodo.24364837](https://doi.org/10.5281/zenodo.24364837), and
+[10.5281/zenodo.24362891](https://doi.org/10.5281/zenodo.24362891) always points to the latest version. See
+[CITATION.cff](CITATION.cff) for the citation metadata.
 
 ## Licence
 

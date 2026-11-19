@@ -8,7 +8,17 @@ authors:
     orcid: "https://orcid.org/0009-0001-8824-2615"
 version: "0.2.0"
 date-released: "2026-11-19"
-doi: "10.5281/zenodo.24362892"
+doi: "10.5281/zenodo.24362891"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.24362891"
+    description: "All versions (resolves to the latest)"
+  - type: doi
+    value: "10.5281/zenodo.24364837"
+    description: "Version 0.2.0"
+  - type: doi
+    value: "10.5281/zenodo.24362892"
+    description: "Version 0.1.0"
 license: MIT
 abstract: >-
   A browser toolkit for swappable real-time fire modules in Three.js games,
