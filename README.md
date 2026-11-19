@@ -95,17 +95,18 @@ The tests cover the Fire API, reference module loading, and WebGPU readback with
 
 ## Try the interactive demo in VALLEYWARD
 
-The interactive demo requires a separate VALLEYWARD checkout. Place the two checkouts side by side as `Firewraith` and
-`Valleyward` to match the game's `file:../Firewraith` dependency. From the Firewraith checkout, run
+Clone [VALLEYWARD](https://github.com/lethehaiau/valleyward) and run it; it installs the published Firewraith:
 
 ```bash
-cd ../Valleyward
+git clone https://github.com/lethehaiau/valleyward.git && cd valleyward
 npm ci
 npm run dev
 ```
 
 Open [the WebGL2 demo](http://127.0.0.1:5350/?lance=classic&ground=classic) or
-[the WebGPU demo](http://127.0.0.1:5350/?firemod=classic-webgpu) in a browser that supports the selected backend.
+[the WebGPU demo](http://127.0.0.1:5350/?firemod=classic-webgpu) in a browser that supports the selected backend. To run
+the game on your local Firewraith instead, clone both side by side and run `npm install --no-save ../firewraith` in the
+game's folder.
 
 Your own module, served by any dev server on this machine:
 
@@ -113,12 +114,16 @@ Your own module, served by any dev server on this machine:
 http://127.0.0.1:5350/?lance=http://localhost:5173/src/index.js
 ```
 
+## Contributing
+
+New fire modules are welcome. [CONTRIBUTING.md](CONTRIBUTING.md) explains the module layout, the catalog entry, the
+checks, how to test a module in the game, and how to open a pull request.
+
 ## Plan
 
 1. **Done:** the Fire API v1, the kit, `classic`, and the game's fire host (per-slot fallback, `?lance=` / `?ground=`,
    localhost module URLs).
-2. **The two game editions** (WebGL2 and WebGPU) and a `webgpu` reference module: `classic-webgpu` is done; the game's
-   WebGPU edition is being ported part by part.
+2. **Done:** the two game editions (WebGL2 and WebGPU) and the `webgpu` reference module, `classic-webgpu`.
 3. **For authors:**
    - starter modules for particles, a 2D grid, and a 3D grid;
    - a `create` tool;
@@ -126,8 +131,8 @@ http://127.0.0.1:5350/?lance=http://localhost:5173/src/index.js
    - hot reload inside the running game;
    - live switching;
    - a sandbox mode.
-4. **Hosting:** the hosted game with a module picker, a registry of listed modules, and checks for listing pull
-   requests.
+4. **Listing modules:** done: the module catalog (`modules/catalog.js`), which the game reads, and the checks every
+   module must pass (`tests/modules.test.mjs`, run on every pull request). Next: a module picker in the hosted game.
 
 ## Citation
 
@@ -136,6 +141,7 @@ If you use Firewraith in your work, cite the version you used. See [CITATION.cff
 ## Licence
 
 MIT: see [LICENSE](LICENSE). It covers everything in this repo: the API, the kit and the reference
-modules. A module you write and load into the game is yours, under whatever licence you choose. Two small shader
+modules. A module you keep in your own repo and load by URL is yours, under whatever licence you choose; a module contributed to
+this repo is MIT (see CONTRIBUTING.md). Two small shader
 snippets by other authors (David Hoskins' `hash12`, Inigo Quilez's texture value noise) are MIT too: see
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md). The package is still marked `private` until it is published to npm.
