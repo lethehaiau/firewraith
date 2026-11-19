@@ -10,9 +10,9 @@ burns the horde.
 - **The idea:** write your own fire or fluid simulation as a module, drop it into the game, and play with it.
 - **The game:** lives in its own repo and loads modules from here.
 
-> Status: v0.1 (2026-11-18), local, not yet published.
+> Version 0.1.0
 > - **Done:** API v1, the `classic` module (webgl2) and its WebGPU port `classic-webgpu`.
-> - **Not yet:** starters, the create tool, the bench and hosting. See "Plan" below.
+> - **Planned:** starter modules, the create tool, a standalone benchmark, and hosting. See "Plan" below.
 > - **Licence:** MIT.
 
 ## The words
@@ -82,15 +82,30 @@ Package entry points:
 
 `three` 0.186.1 is a peer dependency: modules share the game's three.js.
 
-## Trying it in the game
+## Install and run the tests
 
-The game (`../Valleyward`) links this repo (`"firewraith": "file:../Firewraith"`):
+From the Firewraith checkout, use Node.js and npm to install the locked dependencies and run the tests.
 
 ```bash
-cd ../Valleyward && npm ci && npm run dev
-# http://127.0.0.1:5350/?lance=classic&ground=classic
-# the WebGPU edition with the WebGPU port: http://127.0.0.1:5350/?firemod=classic-webgpu   (or ?gpu=webgpu)
+npm ci
+npm test
 ```
+
+The tests cover the Fire API, reference module loading, and WebGPU readback without a browser or GPU.
+
+## Try the interactive demo in VALLEYWARD
+
+The interactive demo requires a separate VALLEYWARD checkout. Place the two checkouts side by side as `Firewraith` and
+`Valleyward` to match the game's `file:../Firewraith` dependency. From the Firewraith checkout, run
+
+```bash
+cd ../Valleyward
+npm ci
+npm run dev
+```
+
+Open [the WebGL2 demo](http://127.0.0.1:5350/?lance=classic&ground=classic) or
+[the WebGPU demo](http://127.0.0.1:5350/?firemod=classic-webgpu) in a browser that supports the selected backend.
 
 Your own module, served by any dev server on this machine:
 
@@ -105,7 +120,7 @@ http://127.0.0.1:5350/?lance=http://localhost:5173/src/index.js
 2. **The two game editions** (WebGL2 and WebGPU) and a `webgpu` reference module: `classic-webgpu` is done; the game's
    WebGPU edition is being ported part by part.
 3. **For authors:**
-   - starters (particles, a 2D grid, a 3D grid from the `cheap-3d-fluid` lab);
+   - starter modules for particles, a 2D grid, and a 3D grid;
    - a `create` tool;
    - a standalone bench;
    - hot reload inside the running game;
@@ -113,6 +128,10 @@ http://127.0.0.1:5350/?lance=http://localhost:5173/src/index.js
    - a sandbox mode.
 4. **Hosting:** the hosted game with a module picker, a registry of listed modules, and checks for listing pull
    requests.
+
+## Citation
+
+If you use Firewraith in your work, cite the version you used. See [CITATION.cff](CITATION.cff) for the citation metadata.
 
 ## Licence
 
