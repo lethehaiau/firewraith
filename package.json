@@ -3,6 +3,8 @@
   "version": "0.2.0",
   "private": true,
   "license": "MIT",
+  "homepage": "https://github.com/lethehaiau/firewraith#readme",
+  "repository": { "type": "git", "url": "git+https://github.com/lethehaiau/firewraith.git" },
   "description": "Swappable real-time fire modules for the VALLEYWARD game: the Fire API, a helper kit and the reference modules.",
   "type": "module",
   "exports": {

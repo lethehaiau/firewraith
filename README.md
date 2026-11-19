@@ -97,6 +97,9 @@ The tests cover the Fire API, reference module loading, and WebGPU readback with
 
 ## Try the interactive demo in VALLEYWARD
 
+Play it online at **[valleyward.app](https://valleyward.app)**: the reference fire, `classic`, or its WebGPU port at
+[valleyward.app/?firemod=classic-webgpu](https://valleyward.app/?firemod=classic-webgpu). To run it locally:
+
 Clone [VALLEYWARD](https://github.com/lethehaiau/valleyward) and run it; it installs the published Firewraith:
 
 ```bash

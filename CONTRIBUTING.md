@@ -114,7 +114,7 @@ The Fire API rules (`docs/API.md`, "Rules"), plus:
 - It ships in the next Firewraith release. Releases are tagged on GitHub and archived on Zenodo with a DOI (see
   [`CITATION.cff`](CITATION.cff)).
 - VALLEYWARD then updates to that release. With its next deploy, your module becomes playable in the hosted game at
-  `?firemod=<id>`.
+  `https://valleyward.app/?firemod=<id>`.
 - Credit stays with you: your name in `info.author` and your module's `README.md`, and in the release notes.
 
 ## Licence
