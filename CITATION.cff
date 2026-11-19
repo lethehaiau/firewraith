@@ -6,7 +6,8 @@ authors:
   - given-names: Au
     family-names: Le
     orcid: "https://orcid.org/0009-0001-8824-2615"
-version: "0.1.0"
+version: "0.2.0"
+date-released: "2026-11-19"
 doi: "10.5281/zenodo.24362892"
 license: MIT
 abstract: >-

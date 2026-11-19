@@ -10,9 +10,11 @@ burns the horde.
 - **The idea:** write your own fire or fluid simulation as a module, drop it into the game, and play with it.
 - **The game:** lives in its own repo and loads modules from here.
 
-> Version 0.1.0
-> - **Done:** API v1, the `classic` module (webgl2) and its WebGPU port `classic-webgpu`.
-> - **Planned:** starter modules, the create tool, a standalone benchmark, and hosting. See "Plan" below.
+> Version 0.2.0
+> - **Done:** API v1, the `classic` module (webgl2) and its WebGPU port `classic-webgpu`, the module catalog and the
+>   checks every module must pass ([CONTRIBUTING.md](CONTRIBUTING.md)).
+> - **Planned:** starter modules, the create tool, a standalone benchmark, and a module picker in the hosted game. See
+>   "Plan" below.
 > - **Licence:** MIT.
 
 ## The words
