@@ -1,16 +1,21 @@
 <!-- Thanks for contributing! See CONTRIBUTING.md. -->
 
-**What this adds or changes**
+## What this adds or changes
 
-**For a new fire module**
-- Module id: `…` (folder `modules/<id>/`, one entry in `modules/catalog.js`)
-- Backend: `webgl2` / `webgpu` · Slots: `lance` / `ground` / both
-- How it works, in a sentence or two:
-- Tested in Valleyward at `?firemod=<id>` (or `?lance=` / `?ground=`): browser, GPU, and what `__ew.perf().fire` reports
-- Screenshot or short clip:
+## For a new fire module
 
-**Checklist**
+<!-- For other changes, replace this section with the checks you ran. -->
+
+- Module ID, backend, and slot or slots
+- How the effect works and what to look for
+- Copyable Valleyward playtest URL and the loaded slot IDs from `__ew.perf().fire.modules`
+- Screenshot or short in-game clip
+- Browser, GPU, resolution, and quality. Include the matched Classic timing and what was measured, or mark timing as unmeasured.
+
+## Checklist
+
+- [ ] For a module, the folder, `info.id`, and the key in `modules/catalog.js` use the same ID
 - [ ] `npm test` passes
-- [ ] The module's `README.md` says who wrote it, what it does and how to tune it
+- [ ] For a module, the README credits the author and explains the effect and tuning
 - [ ] No network calls, storage, cookies, `eval` or workers; no files fetched at run time
 - [ ] I wrote this contribution (or have the right to submit it) and agree to license it under the MIT License
