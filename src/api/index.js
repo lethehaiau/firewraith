@@ -119,6 +119,38 @@ export function checkModule(m, slots) {
   return p;
 }
 
+/**
+ * @typedef {object} Setup       a whole fire a game can offer in its picker: one catalog module per slot (`modules/setups.js`)
+ * @property {string} name       shown in the game's picker
+ * @property {Backend} backend   the backend of every module it uses
+ * @property {Record<Slot, string>} slots   the module id for each slot (every slot is set)
+ * @property {string} [description]
+ */
+
+/** Problems with a setup, checked against the catalog it draws from (an empty list = valid). A setup id may be the id of
+ *  a module only when that module is in the setup (the setup then replaces the module's default one).
+ *  @param {string} id @param {any} setup @param {Record<string, { info: ModuleInfo }>} modules @returns {string[]} */
+export function checkSetup(id, setup, modules) {
+  const p = [];
+  if (typeof id !== 'string' || !ID.test(id)) p.push('the setup id must be 1–40 chars of a-z, 0-9 and -');
+  if (!setup || typeof setup !== 'object') return [...p, 'the setup is missing'];
+  if (typeof setup.name !== 'string' || !setup.name.trim()) p.push('setup.name is required');
+  if (!BACKENDS.includes(setup.backend)) p.push(`setup.backend must be one of ${BACKENDS.join(', ')}`);
+  const slots = setup.slots && typeof setup.slots === 'object' ? setup.slots : {};
+  for (const key of Object.keys(slots)) if (!SLOTS.includes(/** @type {any} */ (key))) p.push(`setup.slots.${key} is not a slot (${SLOTS.join(', ')})`);
+  for (const slot of SLOTS) {
+    const mod = slots[slot];
+    const info = typeof mod === 'string' && Object.prototype.hasOwnProperty.call(modules, mod) ? modules[mod].info : null;
+    if (!info) { p.push(`setup.slots.${slot} must name a module in the catalog`); continue; }
+    if (!info.slots.includes(slot)) p.push(`${mod} does not fill ${slot}`);
+    if (info.backend !== setup.backend) p.push(`${mod} is a ${info.backend} module, not ${setup.backend}`);
+  }
+  if (Object.prototype.hasOwnProperty.call(modules, id) && !SLOTS.some((slot) => slots[slot] === id)) {
+    p.push(`the setup id ${id} is a module the setup does not use`);
+  }
+  return p;
+}
+
 /** Helper for authors: returns `info` frozen after checking it (throws with every problem listed). @param {ModuleInfo} info */
 export function defineInfo(info) {
   const p = checkInfo(info);

@@ -24,8 +24,9 @@ breaks into glowing embers. Render at a lower resolution and see how much detail
 ## Build a module
 
 Start with one effect. A `lance` module draws the Ember Lance's airborne flame. A `ground` module handles fire and smoke
-on the ground, with the option to light the world or tell the game what burns. A module can fill both roles. See the
-[Fire API](docs/API.md) for the `info` and `create(host)` exports and what the game provides each frame.
+on the ground, with the option to light the world or tell the game what burns. A module can fill both roles, and a
+[setup](docs/API.md#setups) can pair it with a partner of your choice. See the [Fire API](docs/API.md) for the `info`
+and `create(host)` exports and what the game provides each frame.
 
 With Node.js 24, clone Firewraith and run the module checks.
 

@@ -6,7 +6,7 @@
 
 <!-- For other changes, replace this section with the checks you ran. -->
 
-- Module ID, backend, and slot or slots
+- Module ID, backend, and slot or slots, plus its setup in `modules/setups.js` if you added one
 - How the effect works and what to look for
 - Copyable Valleyward playtest URL and the loaded slot IDs from `__ew.perf().fire.modules`
 - Screenshot or short in-game clip

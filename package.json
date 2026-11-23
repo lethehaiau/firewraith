@@ -10,6 +10,7 @@
   "exports": {
     ".": "./src/api/index.js",
     "./modules": "./modules/catalog.js",
+    "./setups": "./modules/setups.js",
     "./api": "./src/api/index.js",
     "./kit/webgl2": "./src/kit/webgl2/index.js",
     "./kit/webgpu": "./src/kit/webgpu/index.js",

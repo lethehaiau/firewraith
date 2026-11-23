@@ -16,6 +16,7 @@ Contents:
 - [Light](#light)
 - [Rules](#rules)
 - [Backends and editions](#backends-and-editions)
+- [Setups](#setups)
 - [Trying a module in the game](#trying-a-module-in-the-game)
 - [Versioning](#versioning)
 
@@ -27,6 +28,7 @@ Contents:
 | **slot** | Where a module plugs in. v1 has two. |
 | **`lance`** | The Ember Lance's airborne flame, from the nozzle to where the stream lands. |
 | **`ground`** | The fire on the ground: flames, smoke, embers, steam, the light it casts, and (optionally) the gameplay grid. |
+| **setup** | A whole fire a game offers in its picker: one catalog module per slot (`modules/setups.js`). |
 | **method** | What a module does inside: a 2D or 3D grid, particles, SPH, ray marching, anything. |
 | **host** | The game side: it loads modules, feeds them every frame, and falls back to the edition's reference module when one fails (`classic`; `classic-webgpu` in the WebGPU edition). |
 | **edition** | The game's shading layer: `webgl2` (three.js `WebGLRenderer`, GLSL) or `webgpu` (three.js `WebGPURenderer`, TSL / WGSL). A module runs in the edition of its `backend`. |
@@ -226,10 +228,30 @@ The game boots the edition of the modules picked (`?gpu=webgl2|webgpu` forces on
 natively, with no copies between graphics APIs. A module for the other backend is refused, with the reason shown, and
 the edition's reference module stands in (`classic` in WebGL2, `classic-webgpu` in WebGPU).
 
+## Setups
+
+A **setup** is a whole fire a game can offer in its picker: one catalog module for each slot. Setups are listed in
+[`modules/setups.js`](../modules/setups.js) and exported as `firewraith/setups`:
+
+```js
+'lance-curved-volume': setup({
+  name: 'Curved Volume Lance', backend: 'webgl2',
+  slots: { lance: 'lance-curved-volume', ground: 'classic' },
+}),
+```
+
+- **`slots`:** a catalog module ID for every slot. Each module must fill its slot and use the setup's `backend`.
+- **The ID:** a setup may use the ID of a module it contains. It then replaces that module's default setup, so
+  `?firemod=<module id>` keeps working. Any other setup ID must not be a module ID.
+- **A module without a setup** plays in the slots it fills, with the edition's reference module in the others. Add a
+  setup only to choose other partners or to name a combination of modules.
+- **`checkSetup(id, setup, modules)`** in `src/api/` lists a setup's problems. The tests run it on every entry, and a
+  host can run it to skip a broken setup.
+
 ## Trying a module in the game
 
-- **`?firemod=<id>`:** play a module as a whole setup. It fills the slots it declares, and the edition's reference
-  module fills the others. Players pick the same setups in the game under **P → Fire module**.
+- **`?firemod=<id>`:** play a whole setup: a setup ID, or a module ID for that module's setup. Players pick the same
+  setups in the game under **P → Fire module**.
 - **`?lance=<id>`, `?ground=<id>`:** pick a module for one slot. They override `?firemod=`.
 - **The id:** a listed module (`classic`, `classic-webgpu`), or a URL on your own machine (`http://localhost:5173/src/index.js`). The
   game only loads module URLs from `localhost` / `127.0.0.1`.

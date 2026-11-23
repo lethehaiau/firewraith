@@ -50,6 +50,19 @@ import { info as myFire } from './my-fire/info.js';
 
 The game loads the implementation only when a player picks its catalog ID. Restart Valleyward's dev server after changing the catalog, then launch with `?firemod=<id>`, `?lance=<id>` or `?ground=<id>`. With `?firemod=<id>`, your module fills the slots it declares and the reference module fills the others.
 
+### Choose its partners (optional)
+
+Your module plays in the slots it fills, and the game puts the edition's reference module in the others: a `lance`
+module plays over `classic`'s ground fire. To choose a different partner, or to offer your module with another one as a
+named fire, add a setup to [`modules/setups.js`](modules/setups.js):
+
+```js
+  'my-storm': setup({ name: 'Storm', backend: 'webgl2', slots: { lance: 'my-lance', ground: 'my-ground' } }),
+```
+
+Each slot names a catalog module that fills it on the setup's backend. Use your module's ID as the key to replace its
+default setup. `npm test` checks every setup. See `docs/API.md`, "Setups".
+
 ### Rules (checked)
 
 `npm test` runs [`tests/modules.test.mjs`](tests/modules.test.mjs) on every module. It checks that:
