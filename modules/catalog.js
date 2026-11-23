@@ -3,6 +3,7 @@
 // `load()` imports its code only when a game picks it, so a host can list every module without paying for them.
 import { info as classic } from './classic/info.js';
 import { info as classicWebgpu } from './classic-webgpu/info.js';
+import { info as curvedVolume } from './lance-curved-volume/info.js';
 
 /** @param {import('../src/api/index.js').ModuleInfo} info @param {() => Promise<any>} load */
 const entry = (info, load) => Object.freeze({ info, load });
@@ -11,4 +12,5 @@ const entry = (info, load) => Object.freeze({ info, load });
 export const MODULES = Object.freeze({
   classic: entry(classic, () => import('./classic/index.js')),
   'classic-webgpu': entry(classicWebgpu, () => import('./classic-webgpu/index.js')),
+  'lance-curved-volume': entry(curvedVolume, () => import('./lance-curved-volume/index.js')),
 });

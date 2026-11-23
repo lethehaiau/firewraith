@@ -36,7 +36,7 @@ modules/<id>/
 
 ### Add it to the catalog
 
-One entry in [`modules/catalog.js`](modules/catalog.js):
+Register the module in [`modules/catalog.js`](modules/catalog.js) as soon as you create its entry point. Valleyward reads this catalog from the linked Firewraith checkout. A folder alone does not register an ID. Use the same ID for the folder, `info.id`, and the catalog key.
 
 ```js
 import { info as myFire } from './my-fire/info.js';
@@ -44,7 +44,7 @@ import { info as myFire } from './my-fire/info.js';
   'my-fire': entry(myFire, () => import('./my-fire/index.js')),
 ```
 
-The game lists every catalog entry, and its code loads only when a player picks it.
+The game loads the implementation only when a player picks its catalog ID. Restart Valleyward's dev server after changing the catalog, then launch with `?lance=<id>` or `?ground=<id>`. A module that fills both slots also works with `?firemod=<id>`.
 
 ### Rules (checked)
 
@@ -104,8 +104,9 @@ The Fire API rules (`docs/API.md`, "Rules"), plus:
 1. Fork the repo and make a branch.
 2. Add your module folder and its catalog entry, or make your fix. Keep unrelated changes out.
 3. Run `npm test`. The same checks run on GitHub for every pull request.
-4. Open the pull request and fill in the template: what the module does, its backend and slots, how you tested it in the
-   game, what it costs, and a screenshot or a short clip.
+4. Open the pull request and fill in the [template](.github/pull_request_template.md). Include a copyable Valleyward URL,
+   the loaded slot IDs, and a screenshot or clip. The [Curved Volume module](modules/lance-curved-volume/README.md)
+   shows the module layout, tuning notes, and a matched comparison with Classic.
 5. A maintainer reviews it. Modules run in every player's browser, so every line is reviewed for safety, cost and the
    rules above. Expect questions and requests for changes.
 

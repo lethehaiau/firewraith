@@ -56,7 +56,7 @@ local game with a URL such as `http://127.0.0.1:5350/?lance=http://localhost:517
 
 ## Contribute a module
 
-1. Fork Firewraith and add your module folder and catalog entry. Credit yourself in `info.author` and the module README.
+1. Fork Firewraith. Add `modules/<id>/` and register the same ID in [`modules/catalog.js`](modules/catalog.js) so a linked Valleyward checkout can load it. Credit yourself in `info.author` and the module README.
 2. Run `npm test` and try your module in VALLEYWARD.
 3. Open a pull request. Describe your idea, include a screenshot or short clip, and share your browser, GPU, and
    performance results.
