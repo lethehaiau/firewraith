@@ -1,6 +1,6 @@
 {
   "name": "firewraith",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "license": "MIT",
   "homepage": "https://github.com/lethehaiau/firewraith#readme",
@@ -10,6 +10,7 @@
   "exports": {
     ".": "./src/api/index.js",
     "./modules": "./modules/catalog.js",
+    "./setups": "./modules/setups.js",
     "./api": "./src/api/index.js",
     "./kit/webgl2": "./src/kit/webgl2/index.js",
     "./kit/webgpu": "./src/kit/webgpu/index.js",

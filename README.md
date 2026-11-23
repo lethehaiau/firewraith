@@ -24,8 +24,9 @@ breaks into glowing embers. Render at a lower resolution and see how much detail
 ## Build a module
 
 Start with one effect. A `lance` module draws the Ember Lance's airborne flame. A `ground` module handles fire and smoke
-on the ground, with the option to light the world or tell the game what burns. A module can fill both roles. See the
-[Fire API](docs/API.md) for the `info` and `create(host)` exports and what the game provides each frame.
+on the ground, with the option to light the world or tell the game what burns. A module can fill both roles, and a
+[setup](docs/API.md#setups) can pair it with a partner of your choice. See the [Fire API](docs/API.md) for the `info`
+and `create(host)` exports and what the game provides each frame.
 
 With Node.js 24, clone Firewraith and run the module checks.
 
@@ -62,13 +63,13 @@ local game with a URL such as `http://127.0.0.1:5350/?lance=http://localhost:517
    performance results.
 
 After review and merge, your module can ship in a Firewraith release. Once VALLEYWARD deploys that release, anyone can
-play your module at `https://valleyward.app/?firemod=<id>`.
+pick your module under **P → Fire module** or play it at `https://valleyward.app/?firemod=<id>`.
 
 Improvements to the API, GPU helpers, and reference modules are welcome too. [Contribution guide](CONTRIBUTING.md)
 
 ## Cite Firewraith
 
-Cite the release you used. [v0.2.0 DOI](https://doi.org/10.5281/zenodo.24364837) ·
+Cite the release you used. [v0.2.1 DOI](https://doi.org/10.5281/zenodo.24476634) ·
 [All versions](https://doi.org/10.5281/zenodo.24362891) · [Citation metadata](CITATION.cff)
 
 ## Licence

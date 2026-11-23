@@ -12,7 +12,11 @@ A seeded emitter launches ballistic particles using the host's speed, gravity an
 
 ## Try it in Valleyward
 
-Follow the [two-checkout setup](../../CONTRIBUTING.md#testing-locally) and link this Firewraith checkout into Valleyward. Use Valleyward `8a1621b` or a later version that supports the module catalog.
+Play it at [valleyward.app/?firemod=lance-curved-volume](https://valleyward.app/?firemod=lance-curved-volume), or pick
+**Curved Volume Lance** under **P → Fire module** in the WebGL2 renderer. Its [setup](../setups.js) pairs it with
+Classic's ground fire.
+
+To run it from source, follow the [two-checkout setup](../../CONTRIBUTING.md#testing-locally) and link this Firewraith checkout into Valleyward. Use Valleyward `8a1621b` or a later version that supports the module catalog.
 
 - [Curved Volume with Classic ground fire](http://127.0.0.1:5350/?gpu=webgl2&lance=lance-curved-volume&ground=classic&skipintro=1&fire=smooth)
 - [Classic Lance and Classic ground fire](http://127.0.0.1:5350/?gpu=webgl2&lance=classic&ground=classic&skipintro=1&fire=smooth)
