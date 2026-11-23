@@ -21,7 +21,8 @@
   },
   "files": ["src", "modules", "docs", "README.md", "LICENSE", "THIRD-PARTY-NOTICES.md"],
   "scripts": {
-    "test": "node --test tests/*.test.mjs"
+    "test": "node --test tests/*.test.mjs",
+    "module:new": "node tools/new-module.mjs"
   },
   "peerDependencies": {
     "three": "0.186.1"

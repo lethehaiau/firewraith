@@ -24,6 +24,10 @@ modules/<id>/
   …            any other files your module needs
 ```
 
+To generate a scene-copy starter with lifecycle hooks, run `npm run module:new -- my-fire --slot lance --author "Your name"`.
+Use `--slot ground` for ground events or `--slot both` for both hooks. The default uses WebGL2. Pass `--backend webgpu`
+for a WebGPU starter. The command prints the two catalog lines to add before running the existing module checks.
+
 - **`<id>`:** lowercase `a-z`, `0-9` and `-`, at most 40 characters, unique. It is the folder name, `info.id` and the
   catalog key.
 - **`backend`:** `webgl2` (three.js `WebGLRenderer`, GLSL) or `webgpu` (`WebGPURenderer`, TSL / WGSL). The game boots the
@@ -98,6 +102,17 @@ The Fire API rules (`docs/API.md`, "Rules"), plus:
 3. **Without the catalog** (for example while your module lives in its own repo): serve it from any local dev server and
    load it by URL, e.g. `http://127.0.0.1:5350/?lance=http://localhost:5173/src/index.js`. The game loads module URLs
    only from `localhost` / `127.0.0.1`.
+
+### Produce playtest evidence
+
+With a Valleyward checkout that includes `module:check`, run `npm run module:check -- my-fire --slot lance` from
+Valleyward. Use `--slot ground` for ground fire. The command checks the linked path and catalog, prints a matched
+Classic URL, and records the in-game slot report, screenshots, browser errors, and timing. Add `--preflight` to
+confirm registration and get the playtest links before opening a browser.
+
+Watch the effect in the actual game camera through the tap, held shot, turn, and release, or the ground burst.
+Keep the renderer, pose, quality, and other slot fixed when comparing it with Classic. In the PR, report what was
+measured and the browser and GPU used. Label GPU time, CPU submission, and paced frame intervals separately.
 
 ## Submitting a pull request
 
