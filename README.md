@@ -69,7 +69,7 @@ Improvements to the API, GPU helpers, and reference modules are welcome too. [Co
 
 ## Cite Firewraith
 
-Cite the release you used. [v0.2.1 DOI](https://doi.org/10.5281/zenodo.24476634) ·
+Cite the release you used. [v0.3.0 DOI](https://doi.org/10.5281/zenodo.24478877) ·
 [All versions](https://doi.org/10.5281/zenodo.24362891) · [Citation metadata](CITATION.cff)
 
 ## Licence
