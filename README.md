@@ -62,7 +62,7 @@ local game with a URL such as `http://127.0.0.1:5350/?lance=http://localhost:517
    performance results.
 
 After review and merge, your module can ship in a Firewraith release. Once VALLEYWARD deploys that release, anyone can
-play your module at `https://valleyward.app/?firemod=<id>`.
+pick your module under **P → Fire module** or play it at `https://valleyward.app/?firemod=<id>`.
 
 Improvements to the API, GPU helpers, and reference modules are welcome too. [Contribution guide](CONTRIBUTING.md)
 

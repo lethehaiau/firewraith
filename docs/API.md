@@ -228,7 +228,9 @@ the edition's reference module stands in (`classic` in WebGL2, `classic-webgpu` 
 
 ## Trying a module in the game
 
-- **`?lance=<id>`, `?ground=<id>`:** pick a module per slot. `?firemod=<id>` sets both.
+- **`?firemod=<id>`:** play a module as a whole setup. It fills the slots it declares, and the edition's reference
+  module fills the others. Players pick the same setups in the game under **P → Fire module**.
+- **`?lance=<id>`, `?ground=<id>`:** pick a module for one slot. They override `?firemod=`.
 - **The id:** a listed module (`classic`, `classic-webgpu`), or a URL on your own machine (`http://localhost:5173/src/index.js`). The
   game only loads module URLs from `localhost` / `127.0.0.1`.
 - **`__ew.modules().fire` and `__ew.perf().fire.modules`:** which module runs each slot, and why a slot fell back.

@@ -48,7 +48,7 @@ import { info as myFire } from './my-fire/info.js';
   'my-fire': entry(myFire, () => import('./my-fire/index.js')),
 ```
 
-The game loads the implementation only when a player picks its catalog ID. Restart Valleyward's dev server after changing the catalog, then launch with `?lance=<id>` or `?ground=<id>`. A module that fills both slots also works with `?firemod=<id>`.
+The game loads the implementation only when a player picks its catalog ID. Restart Valleyward's dev server after changing the catalog, then launch with `?firemod=<id>`, `?lance=<id>` or `?ground=<id>`. With `?firemod=<id>`, your module fills the slots it declares and the reference module fills the others.
 
 ### Rules (checked)
 
@@ -92,7 +92,9 @@ The Fire API rules (`docs/API.md`, "Rules"), plus:
    npm run dev                           # http://127.0.0.1:5350/
    ```
 
-   Then open `http://127.0.0.1:5350/?firemod=<id>` (both slots), or `?lance=<id>` / `?ground=<id>` for one slot.
+   Then open `http://127.0.0.1:5350/?firemod=<id>` (your module in its slots, the reference module in the others), or
+   `?lance=<id>` / `?ground=<id>` for one slot. In dev, the **P** menu also switches the **Fire module**, **Lance module**
+   and **Ground module**.
    - A `webgpu` module needs a browser with WebGPU.
    - The game is silent in a clone: its audio is not part of the repo.
    - Useful while you work: `?debug=1` draws the gameplay grid; `?perf=1` shows frame times. In the console,
@@ -129,8 +131,8 @@ measured and the browser and GPU used. Label GPU time, CPU submission, and paced
 
 - It ships in the next Firewraith release. Releases are tagged on GitHub and archived on Zenodo with a DOI (see
   [`CITATION.cff`](CITATION.cff)).
-- VALLEYWARD then updates to that release. With its next deploy, your module becomes playable in the hosted game at
-  `https://valleyward.app/?firemod=<id>`.
+- VALLEYWARD then updates to that release. With its next deploy, players can pick your module in the hosted game under
+  **P → Fire module**, or open `https://valleyward.app/?firemod=<id>`.
 - Credit stays with you: your name in `info.author` and your module's `README.md`, and in the release notes.
 
 ## Licence
